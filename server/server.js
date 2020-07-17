@@ -32,7 +32,7 @@ const admin = require("./models/admin.model");
 // API routing points
 
 // GET
-routes.route("/admin/prayer").get(function(req, res) {
+routes.route("/api/admin/prayer").get(function(req, res) {
     site.PrayerRequest.find(function(err, prayers) {
         if(err) {
             console.log(err);
@@ -42,7 +42,7 @@ routes.route("/admin/prayer").get(function(req, res) {
     });
 });
 
-routes.route("/site/ministry/current_ministry").get(function(req, res) {
+routes.route("/api/site/ministry/current_ministry").get(function(req, res) {
     admin.CurrentMinistry.find(function(err, currentMinistry) {
         if (err) {
             console.log(err);
@@ -52,7 +52,7 @@ routes.route("/site/ministry/current_ministry").get(function(req, res) {
     });
 });
 
-routes.route("/site/ministry/past_ministry").get(function(req, res) {
+routes.route("/api/site/ministry/past_ministry").get(function(req, res) {
     admin.PastMinistry.find(function(err, pastMinistry) {
         if (err) {
             console.log(err);
@@ -63,7 +63,7 @@ routes.route("/site/ministry/past_ministry").get(function(req, res) {
 });
 
 // POST
-routes.route("/admin/ministry").post(function(req, res) {
+routes.route("/api/admin/ministry").post(function(req, res) {
     admin.CurrentMinistry.find(function(err, currentMinistry) {
         if (currentMinistry.length == 0) {
             let ministry = new admin.CurrentMinistry(req.body);
@@ -100,7 +100,7 @@ routes.route("/admin/ministry").post(function(req, res) {
     })
 })
 
-routes.route("/site/prayer").post(function(req, res) {
+routes.route("/api/site/prayer").post(function(req, res) {
     let prayer = new site.PrayerRequest(req.body);
     prayer.save()
         .then(resp => {
@@ -112,7 +112,7 @@ routes.route("/site/prayer").post(function(req, res) {
 })
 
 // DELETE
-routes.route("/admin/prayer/delete/:id").delete(function(req, res) {
+routes.route("/api/admin/prayer/delete/:id").delete(function(req, res) {
     site.PrayerRequest.findById(req.params.id, function(err, prayer){
         if(!prayer) {
             res.status(404).send("Prayer request not found");
@@ -128,7 +128,7 @@ routes.route("/admin/prayer/delete/:id").delete(function(req, res) {
     })
 })
 
-routes.route("/admin/ministry/delete/:id").delete(function(req, res) {
+routes.route("/api/admin/ministry/delete/:id").delete(function(req, res) {
     admin.PastMinistry.findById(req.params.id, function(err, pastMinistry) {
         if (!pastMinistry) {
             res.status(404).send("ministry not found");

@@ -5,21 +5,21 @@ volumes:
     configdb:
 
 services:
-    # client:
-    #     image: node
-    #     working_dir: /app/client
-    #     volumes: 
-    #         - ./client:/app/client:cached
-    #     command: npm start
-    #     environment: 
-    #         - NODE_ENV=developement
-    #         - PORT=3000
-    #     ports:
-    #         - "3000:3000"
-    #     stdin_open: true
-    #     tty: true
-    #     depends_on: 
-    #         - server
+    client:
+        image: node
+        working_dir: /app/client
+        volumes: 
+            - ./client:/app/client
+        command: npm start
+        environment: 
+            - NODE_ENV=developement
+            - PORT=3000
+        ports:
+            - "3000:3000"
+        stdin_open: true
+        tty: true
+        depends_on: 
+            - server
 
     db:
         image: mongo:latest
